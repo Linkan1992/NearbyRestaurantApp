@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="viewModel"
+                type="linkan.a740362.nearbyrestaurantapp.ui.activity.main.MainViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                       xmlns:bind="http://schemas.android.com/apk/res-auto"
+                                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                       android:layout_width="match_parent"
+                                                       android:layout_height="match_parent"
+                                                       android:clickable="true"
+                                                       android:background="@color/bg_color" android:focusable="true">
+
+        <TextView
+                android:id="@+id/heading"
+                style="@style/TextStyle.Heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home"
+                android:visibility="gone"/>
+
+        <!-- Adding search progress layout -->
+        <include
+                android:id="@+id/included_base_search_loader"
+                layout="@layout/search_progress_loader"
+                bind:viewModel="@{(linkan.a740362.nearbyrestaurantapp.base.BaseViewModel) viewModel}"/>
+
+
+        <!--Restaurant Item recylerview layout-->
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/included_base_search_loader"
+                app:searchAdapter="@{ viewModel.mSearchRestaurantObservableList }"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

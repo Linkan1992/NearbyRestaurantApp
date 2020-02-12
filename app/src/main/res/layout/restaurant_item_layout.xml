@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable name="viewModel"
+                  type="linkan.a740362.nearbyrestaurantapp.ui.adapter.geocodeAdapter.RestaurantViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                       xmlns:fresco="http://schemas.android.com/apk/res-auto"
+                                                       xmlns:tools="http://schemas.android.com/tools"
+                                                       android:id="@+id/cl_root"
+                                                       android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+                                                       android:onClick="@{ () -> viewModel.submit() }"
+                                                       android:foreground="?selectableItemBackground">
+
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/dimes_16dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/dimes_16dp"/>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/img_avatar"
+                style="@style/TextStyle.Avatar"
+                android:layout_width="@dimen/dimes_75dp"
+                android:layout_height="@dimen/dimes_75dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="parent"
+                fresco:failureImage="@drawable/nointernet_connection"
+                fresco:placeholderImage="@drawable/nointernet_connection"
+                fresco:roundAsCircle="false"
+                fresco:roundedCornerRadius="@dimen/dimes_8dp"
+                fresco:roundTopLeft="true"
+                fresco:roundTopRight="true"
+                fresco:roundBottomLeft="true"
+                fresco:roundBottomRight="true"
+                app:imageUrl="@{ viewModel.thumbnail }"/>
+
+
+        <TextView
+                android:id="@+id/tv_restaurant_name"
+                style="@style/TextStyle.MediumSize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/img_avatar"
+                app:layout_constraintTop_toTopOf="@id/img_avatar"
+                app:layout_constraintEnd_toStartOf="@id/tv_rating"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                android:text="@{ viewModel.restaurantName }"
+                tools:text="Peco Peco "/>
+
+        <TextView
+                android:id="@+id/tv_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/tv_restaurant_name"
+                app:layout_constraintTop_toTopOf="@id/tv_restaurant_name"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                android:text="@{ viewModel.ratingNum }"
+                android:background="@drawable/rating_rounded_corner"
+                tools:text="3.8"
+                tools:background="@drawable/rating_rounded_corner"/>
+
+        <TextView
+                android:id="@+id/tv_cousine_type"
+                style="@style/TextStyle.RegularSize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="@id/tv_restaurant_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_restaurant_name"
+                app:layout_constraintEnd_toEndOf="@id/tv_restaurant_name"
+                android:text="@{ viewModel.cuisineType }"
+                tools:text="Chinese, Seafood, Asian"/>
+
+        <TextView
+                android:id="@+id/tv_cost_per_person"
+                style="@style/TextStyle.RegularSize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_restaurant_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_cousine_type"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                android:text="@{ viewModel.cost_per_person }"
+                tools:text="Rs. 300 per person"/>
+
+        <TextView
+                android:id="@+id/tv_locality"
+                style="@style/TextStyle.RegularSize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_restaurant_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_cost_per_person"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                android:text="@{ viewModel.locality }"
+                tools:text="Vikhroli"/>
+
+        <TextView
+                android:id="@+id/grey_seperator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dimes_16dp"
+                android:background="@color/lightGrey"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_locality"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
